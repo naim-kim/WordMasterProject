@@ -14,11 +14,11 @@ WordCRUD(Scanner s) {
 
     @Override
     public Object add() {
-        System.out.print(" => Difficulty(1,2,3) & input new word: ");
+        System.out.print("=> 난이도(1,2,3) & 새 단어 입력 :");
         int level = s.nextInt();
         String word = s.nextLine();
         //1. driveway
-        System.out.print("Input Definition: ");
+        System.out.print("뜻 입력 : ");
         String meaning = s.nextLine();
 
 
@@ -28,7 +28,7 @@ WordCRUD(Scanner s) {
     public void addWord(){
         Word one = (Word)add();
         list.add(one);
-        System.out.println(" New word successfully added!");
+        System.out.println("새 단어가 단어장에 추가됐습니다 !!! \n");
 
     }
 
