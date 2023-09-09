@@ -12,8 +12,8 @@ public class WordManager {
 
     public int selectMenu() {
         System.out.print("/*** 영단어 마스터 ***\n"
-        + "----------------\n"
-        + "1. Read all words\n"
+        + "------------------\n"
+        + "1. Show all words\n"
         + "2. By difficulty\n"
         + "3. Search word\n"
         + "4. Add word\n"
@@ -21,7 +21,9 @@ public class WordManager {
         + "6. Delete word\n"
         + "7. Save file\n"
         + "0. Exit\n"
+        + "------------------\n"
         + " => Select Menu: ");
+
 
         return s.nextInt();
     }
@@ -32,7 +34,7 @@ public class WordManager {
             if (menu == 4) {
                 wordCRUD.addWord();
             } else if (menu == 1) {
-                //list
+                wordCRUD.listAll();
             }
         }
     }
