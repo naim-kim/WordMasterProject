@@ -8,7 +8,6 @@ public class WordCRUD implements ICRUD{
 ArrayList<Word> list;
 Scanner s;
 final String fname = "Dictionary.txt";
-    private int level;
 
     WordCRUD(Scanner s) {
     list = new ArrayList<>();
@@ -75,11 +74,11 @@ final String fname = "Dictionary.txt";
     public void listAll(int level) {
         int j = 0;
         System.out.println("-----------------------");
-        for (int i = 0; i < list.size(); i++) {
-            int ilevel = list.get(i).getLevel();
+        for (Word word : list) { //enhanced for loop
+            int ilevel = word.getLevel();
             if (ilevel != level) continue;
             System.out.print((j + 1) + " "); //j
-            System.out.println(list.get(i).toString());
+            System.out.println(word.toString());
             j++;
         }
         System.out.println("-----------------------");
@@ -127,7 +126,7 @@ final String fname = "Dictionary.txt";
                 line = br.readLine();
                 if (line == null) break;
 
-                String data[] = line.split("\\|");
+                String[] data = line.split("\\|");
                 int level = Integer.parseInt(data[0]);
                 String word = data[1];
                 String meaning = data[2];
