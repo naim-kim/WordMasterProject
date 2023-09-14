@@ -76,10 +76,29 @@ WordCRUD(Scanner s) {
         System.out.print ("=> 수정할 번호 선택: ");
         int id = s.nextInt();
         s.nextLine(); //  엔터가 입력 안되도록
+
         System.out.print ("=> 뜻 입력: ");
         String meaning = s.nextLine();
         Word word = list.get(idlist.get(id-1));
         word.setMeaning(meaning);
         System.out.println("단어가 수정되었습니다. ");
+    }
+
+    public void deleteItem() {
+        System.out.print ("=> 삭제할 단어 검색 : ");
+        String keyword = s.next();
+        ArrayList<Integer> idlist = this.listAll(keyword);
+        System.out.print ("=> 삭제할 번호 선택: ");
+        int id = s.nextInt();
+        s.nextLine(); //  엔터가 입력 안되도록
+
+        System.out.print ("=> 정말로 삭제하겠습니까: ");
+        String ans = s.next();
+        if(ans.equalsIgnoreCase("y")) {
+            list.remove((int)idlist.get(id-1)); //  정수로 바꿈
+            System.out.println("단어가 삭제되었습니다. ");
+        } else
+            System.out.println("취소괴었습닌다. ");
+
     }
 }
