@@ -78,7 +78,7 @@ final String fname = "Dictionary.txt";
             int ilevel = word.getLevel();
             if (ilevel != level) continue;
             System.out.print((j + 1) + " "); //j
-            System.out.println(word.toString());
+            System.out.println(word);
             j++;
         }
         System.out.println("-----------------------");
