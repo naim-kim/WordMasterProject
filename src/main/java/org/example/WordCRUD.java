@@ -25,7 +25,7 @@ WordCRUD(Scanner s) {
         //driveway entered
         return new Word(0, level, word, meaning);
     }
-    public void addWord(){
+    public void addItem(){
         Word one = (Word)add();
         list.add(one);
         System.out.println("새 단어가 단어장에 추가됐습니다 !!! \n");
