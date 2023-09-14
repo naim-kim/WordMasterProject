@@ -28,6 +28,8 @@ public class WordManager {
         return s.nextInt();
     }
     public void start(){
+
+        wordCRUD.loadfile();
         while(true) {
             int menu = selectMenu();
             if (menu == 0) {
@@ -35,13 +37,17 @@ public class WordManager {
                 break;
             }
             if (menu == 4) {
-                wordCRUD.addItem();
-            } else if (menu == 1) {
+                wordCRUD.addItem(); //create
+
+            } else if (menu == 1) { //read
                 wordCRUD.listAll();
+
             } else if (menu == 5) { //update
                 wordCRUD.updateItem();
-            }else if (menu == 6) { //delete
+
+            } else if (menu == 6) { //delete
                 wordCRUD.deleteItem();
+
             }
         }
     }
