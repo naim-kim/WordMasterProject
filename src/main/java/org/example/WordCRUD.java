@@ -2,8 +2,6 @@ package org.example;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Scanner;
 
 public class WordCRUD implements ICRUD {
@@ -178,37 +176,33 @@ public class WordCRUD implements ICRUD {
     public void sortWords() {
         Scanner scanner = new Scanner(System.in);
 
-        int ans;
-        while(true) {
-            System.out.println("단어 정렬 기준: 1.알파벳 2.난이도");
-            ans = scanner.nextInt();
+        int choice;
+        System.out.println("단어 정렬 기준: 1.알파벳 2.난이도 0.돌아가기");
 
-            if (ans == 1 || ans == 2) {
+        while(true) {
+
+            choice = scanner.nextInt();
+
+            if (choice == 1 || choice == 2) {
                 break;
+            } else if (choice == 0) {
+                return;
             } else {
-                System.out.println("다시 입력하시오. 단어 정렬 기준: 1.알파벳 2.난이도");
+                System.out.println("다시 입력하시오.\n 단어 정렬 기준: 1.알파벳 2.난이도 0.돌아가기");
             }
         }
 
-        if (ans == 1) {
+        if (choice == 1) {
             // Sort alphabetically
-            list.sort(new Comparator<Word>() {
-                @Override
-                public int compare(Word word1, Word word2) {
+            list.sort((word1, word2) -> word1.getWord().compareToIgnoreCase(word2.getWord()));
+        } else {
+            // Sort by level + alphabetically
+            list.sort((word1, word2) -> {
+                int compareLevel = Integer.compare(word1.getLevel(), word2.getLevel());
+                if (compareLevel == 0) {
                     return word1.getWord().compareToIgnoreCase(word2.getWord());
                 }
-            });
-        } else if (ans == 2) {
-            // Sort by level + alphabetically
-            list.sort(new Comparator<Word>() {
-                @Override
-                public int compare(Word word1, Word word2) {
-                    int compareLevel = Integer.compare(word1.getLevel(), word2.getLevel());
-                    if (compareLevel == 0) {
-                        return word1.getWord().compareToIgnoreCase(word2.getWord());
-                    }
-                    return compareLevel;
-                }
+                return compareLevel;
             });
         }
         listAll();
