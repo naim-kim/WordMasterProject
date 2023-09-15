@@ -63,6 +63,9 @@ public class WordManager {
                 wordCRUD.saveFile();
 
             }
+            else if (menu == 8) { //sorting words in alphabetical or by level
+                wordCRUD.sortWords();
+            }
         }
     }
 }
