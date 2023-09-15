@@ -2,17 +2,19 @@ package org.example;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
-public class WordCRUD implements ICRUD{
-ArrayList<Word> list;
-Scanner s;
-final String fname = "Dictionary.txt";
+public class WordCRUD implements ICRUD {
+    ArrayList<Word> list;
+    Scanner s;
+    final String fname = "Dictionary.txt";
 
     WordCRUD(Scanner s) {
-    list = new ArrayList<>();
-    this.s = s;
-}
+        list = new ArrayList<>();
+        this.s = s;
+    }
 
     @Override
     public Object add() {
@@ -27,8 +29,9 @@ final String fname = "Dictionary.txt";
         //driveway entered
         return new Word(0, level, word, meaning);
     }
-    public void addItem(){
-        Word one = (Word)add();
+
+    public void addItem() {
+        Word one = (Word) add();
         list.add(one);
         System.out.println("새 단어가 단어장에 추가됐습니다 !!! \n");
 
@@ -48,21 +51,24 @@ final String fname = "Dictionary.txt";
     public void selectOne(int i) {
 
     }
+
     public void listAll() {
-         System.out.println("-----------------------");
-         for(int i = 0; i<list.size(); i++) {
-             System.out.print((i+1) + " ");
-             System.out.println(list.get(i).toString());
-         }
         System.out.println("-----------------------");
-    } public ArrayList<Integer> listAll(String keyword) {
+        for (int i = 0; i < list.size(); i++) {
+            System.out.print((i + 1) + " ");
+            System.out.println(list.get(i).toString());
+        }
+        System.out.println("-----------------------");
+    }
+
+    public ArrayList<Integer> listAll(String keyword) {
         ArrayList<Integer> idlist = new ArrayList<>();
         int j = 0;
         System.out.println("-----------------------");
-        for(int i = 0; i<list.size(); i++) {
+        for (int i = 0; i < list.size(); i++) {
             String word = list.get(i).getWord();
-            if(!word.contains(keyword)) continue;
-            System.out.print((j+1) + " ");
+            if (!word.contains(keyword)) continue;
+            System.out.print((j + 1) + " ");
             System.out.println(list.get(i).toString());
             idlist.add(i);
             j++;
@@ -85,44 +91,45 @@ final String fname = "Dictionary.txt";
     }
 
     public void updateItem() {
-        System.out.print ("=> 수정할 단어 검색 : ");
+        System.out.print("=> 수정할 단어 검색 : ");
         String keyword = s.next();
         ArrayList<Integer> idlist = this.listAll(keyword);
-        System.out.print ("=> 수정할 번호 선택: ");
+        System.out.print("=> 수정할 번호 선택: ");
         int id = s.nextInt();
         s.nextLine(); //  엔터가 입력 안되도록
 
-        System.out.print ("=> 뜻 입력: ");
+        System.out.print("=> 뜻 입력: ");
         String meaning = s.nextLine();
-        Word word = list.get(idlist.get(id-1));
+        Word word = list.get(idlist.get(id - 1));
         word.setMeaning(meaning);
         System.out.println("단어가 수정되었습니다. ");
     }
 
     public void deleteItem() {
-        System.out.print ("=> 삭제할 단어 검색 : ");
+        System.out.print("=> 삭제할 단어 검색 : ");
         String keyword = s.next();
         ArrayList<Integer> idlist = this.listAll(keyword);
-        System.out.print ("=> 삭제할 번호 선택: ");
+        System.out.print("=> 삭제할 번호 선택: ");
         int id = s.nextInt();
         s.nextLine(); //  엔터가 입력 안되도록
 
-        System.out.print ("=> 정말로 삭제하겠습니까: ");
+        System.out.print("=> 정말로 삭제하겠습니까: ");
         String ans = s.next();
-        if(ans.equalsIgnoreCase("y")) {
-            list.remove((int)idlist.get(id-1)); //  정수로 바꿈
+        if (ans.equalsIgnoreCase("y")) {
+            list.remove((int) idlist.get(id - 1)); //  정수로 바꿈
             System.out.println("단어가 삭제되었습니다. ");
         } else
             System.out.println("취소괴었습닌다. ");
 
     }
+
     public void loadfile() {
         try {
             BufferedReader br = new BufferedReader(new FileReader(fname));
             String line;
             int count = 0;
 
-            while(true) {
+            while (true) {
                 line = br.readLine();
                 if (line == null) break;
 
@@ -146,7 +153,7 @@ final String fname = "Dictionary.txt";
     public void saveFile() {
         try {
             PrintWriter pr = new PrintWriter(new FileWriter("test.txt"));
-            for(Word one : list) {
+            for (Word one : list) {
                 pr.write(one.toFileString() + "\n");
             }
             pr.close();
@@ -157,9 +164,9 @@ final String fname = "Dictionary.txt";
     }
 
     public void searchLevel() {
-    System.out.println("==> 원하는 레벨은?");
-    int level = s.nextInt();
-    listAll(level);
+        System.out.println("==> 원하는 레벨은?");
+        int level = s.nextInt();
+        listAll(level);
     }
 
     public void searchWord() {
@@ -168,4 +175,36 @@ final String fname = "Dictionary.txt";
         listAll(keyword);
     }
 
+    public void sortWords() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("단어 정렬 기준: 1.알파벳 2.난이도");
+        int ans = scanner.nextInt();
+
+        if (ans == 1) {
+            // Sort alphabetically
+            list.sort(new Comparator<Word>() {
+                @Override
+                public int compare(Word word1, Word word2) {
+                    return word1.getWord().compareToIgnoreCase(word2.getWord());
+                }
+            });
+        } else if (ans == 2) {
+            // Sort by level + alphabetically
+            list.sort(new Comparator<Word>() {
+                @Override
+                public int compare(Word word1, Word word2) {
+                    int compareLevel = Integer.compare(word1.getLevel(), word2.getLevel());
+                    if (compareLevel == 0) {
+                        return word1.getWord().compareToIgnoreCase(word2.getWord());
+                    }
+                    return compareLevel;
+                }
+            });
+        } else {
+            return; //returns to main
+        }
+        listAll();
+
+    }
 }
+

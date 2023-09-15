@@ -21,6 +21,7 @@ public class WordManager {
                 5. 단어 수정
                 6. 단어 삭제
                 7. 파일 저장
+                8. 단어 알파벳 순으로 보기
                 0. 나가기
 
                 ********************
@@ -62,6 +63,8 @@ public class WordManager {
             } else if (menu == 7) { //save file
                 wordCRUD.saveFile();
 
+            } else if (menu == 8) { //sorting words
+                wordCRUD.sortWords();
             }
         }
     }
