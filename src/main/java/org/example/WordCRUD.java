@@ -177,8 +177,18 @@ public class WordCRUD implements ICRUD {
 
     public void sortWords() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("단어 정렬 기준: 1.알파벳 2.난이도");
-        int ans = scanner.nextInt();
+
+        int ans;
+        while(true) {
+            System.out.println("단어 정렬 기준: 1.알파벳 2.난이도");
+            ans = scanner.nextInt();
+
+            if (ans == 1 || ans == 2) {
+                break;
+            } else {
+                System.out.println("다시 입력하시오. 단어 정렬 기준: 1.알파벳 2.난이도");
+            }
+        }
 
         if (ans == 1) {
             // Sort alphabetically
@@ -200,8 +210,6 @@ public class WordCRUD implements ICRUD {
                     return compareLevel;
                 }
             });
-        } else {
-            return; //returns to main
         }
         listAll();
 
