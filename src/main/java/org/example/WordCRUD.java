@@ -190,6 +190,7 @@ public class WordCRUD implements ICRUD {
             } else {
                 System.out.println("다시 입력하시오.\n 단어 정렬 기준: 1.알파벳 2.난이도 0.돌아가기");
             }
+            System.out.println("-----------------------");
         }
 
         if (choice == 1) {
@@ -204,6 +205,7 @@ public class WordCRUD implements ICRUD {
                 }
                 return compareLevel;
             });
+            System.out.println("-----------------------");
         }
         listAll();
 
