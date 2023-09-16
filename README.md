@@ -3,7 +3,7 @@ Description:
   This project is a simple CRUD application, that will the user will be able to manipulate as a personal English vocabulary list!
 
 JDK 버전:
-![image](https://github.com/naim-kim/WordMasterProject/assets/143364203/0ab6895c-fa4a-4588-9d35-0da8541fc576)
+![image](screenshots/1.1.png)
 
 기능 실행 확인:
 
