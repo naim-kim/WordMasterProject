@@ -3,12 +3,12 @@ Description:
   This project is a simple CRUD application, that will the user will be able to manipulate as a personal English vocabulary list!
 
 JDK 버전:
-![image](screenshots/1.1.png)
+![img](screenshots/jdkVER.png)
 
 기능 실행 확인:
 
 ■ [파일 읽기] + 데이터파일(Dictionary.txt) 목록을 보두 다 읽고 등록하였는 기능:
-  ![1](https://github.com/naim-kim/WordMasterProject/assets/143364203/9c313dfe-d37d-40eb-b128-ca4254447c89)
+  ![1](screenshots/1.1.png)
 
 
   'Dictionary.txt'  파일 단어들:
